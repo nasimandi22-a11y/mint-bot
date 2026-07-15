@@ -18,7 +18,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     reply_markup = InlineKeyboardMarkup(keyboard)
 
     await update.message.reply_text(
-        "Selamat datang di Mint Mobile Store Distributor! 📱",
+        "📶 Mint Mobile Store Distributor!",
         reply_markup=reply_markup
     )
 
@@ -28,12 +28,13 @@ async def cek_stok(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await query.answer()
 
     text = """
-📶 WARUNG MINT MOBILE!
+📶 Mint Mobile Store
 
 📦 STOK ITEM
 ✅ 11 Item Ready
 
 💰 Harga:
+
 📱 Mint Mobile — Rp 100.000
 🌎 Mint Mobile + Roam — Rp 150.000
 
@@ -43,7 +44,7 @@ Silakan pilih produk:
     keyboard = [
         [
             InlineKeyboardButton(
-                "📊 STOK ITEM",
+                "📦 STOK ITEM",
                 callback_data="stok_info"
             )
         ],
@@ -78,7 +79,7 @@ async def produk(update: Update, context: ContextTypes.DEFAULT_TYPE):
 💰 Harga:
 Rp 100.000
 
-📊 Stok:
+📦 Stok:
 ✅ 11 Item Ready
 
 ✅ Ready — Siap Order!
@@ -91,7 +92,7 @@ Rp 100.000
 💰 Harga:
 Rp 150.000
 
-📊 Stok:
+📦 Stok:
 ✅ 11 Item Ready
 
 ✅ Ready — Siap Order!
@@ -119,7 +120,7 @@ async def stok_info(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await query.answer()
 
     text = """
-📊 STOK ITEM
+📦 STOK ITEM
 
 📱 Mint Mobile
 🌎 Mint Mobile + Roam
@@ -128,6 +129,7 @@ Total Stock:
 ✅ 11 Item Ready
 
 💰 Harga:
+
 📱 Mint Mobile — Rp 100.000
 🌎 Mint Mobile + Roam — Rp 150.000
 """
