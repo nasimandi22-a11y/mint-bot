@@ -18,7 +18,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     reply_markup = InlineKeyboardMarkup(keyboard)
 
     await update.message.reply_text(
-        "📶 Mint Mobile Store Distributor!",
+        "📶 WARUNG MINT MOBILE!",
         reply_markup=reply_markup
     )
 
@@ -28,7 +28,7 @@ async def cek_stok(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await query.answer()
 
     text = """
-📶 Mint Mobile Store
+📶 WARUNG Mint Mobile
 
 📦 STOK ITEM
 ✅ 11 Item Ready
