@@ -33,6 +33,10 @@ async def cek_stok(update: Update, context: ContextTypes.DEFAULT_TYPE):
 📊 STOK ITEM
 ✅ 11 Item Ready
 
+💰 Harga:
+📱 Mint Mobile — Rp 100.000
+🌎 Mint Mobile + Roam — Rp 150.000
+
 Silakan pilih produk:
 """
 
@@ -67,11 +71,28 @@ async def produk(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
     await query.answer()
 
-    text = """
-📦 Produk Mint Mobile
+    if query.data == "mint_mobile":
+        text = """
+📱 Mint Mobile
 
-💰 Harga: Rp 150.000
-📊 Stok: 11 Item
+💰 Harga:
+Rp 100.000
+
+📊 Stok:
+✅ 11 Item Ready
+
+✅ Ready — Siap Order!
+"""
+
+    else:
+        text = """
+🌎 Mint Mobile + Roam
+
+💰 Harga:
+Rp 150.000
+
+📊 Stok:
+✅ 11 Item Ready
 
 ✅ Ready — Siap Order!
 """
@@ -97,8 +118,7 @@ async def stok_info(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
     await query.answer()
 
-    await query.edit_message_text(
-        """
+    text = """
 📊 STOK ITEM
 
 📱 Mint Mobile
@@ -106,15 +126,36 @@ async def stok_info(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 Total Stock:
 ✅ 11 Item Ready
+
+💰 Harga:
+📱 Mint Mobile — Rp 100.000
+🌎 Mint Mobile + Roam — Rp 150.000
 """
+
+    keyboard = [
+        [
+            InlineKeyboardButton(
+                "⬅️ Kembali",
+                callback_data="cek_stok"
+            )
+        ]
+    ]
+
+    reply_markup = InlineKeyboardMarkup(keyboard)
+
+    await query.edit_message_text(
+        text,
+        reply_markup=reply_markup
     )
 
 
 app = Application.builder().token(TOKEN).build()
 
+
 app.add_handler(
     CommandHandler("start", start)
 )
+
 
 app.add_handler(
     CallbackQueryHandler(
@@ -123,12 +164,14 @@ app.add_handler(
     )
 )
 
+
 app.add_handler(
     CallbackQueryHandler(
         produk,
         pattern="mint_mobile|mint_roam"
     )
 )
+
 
 app.add_handler(
     CallbackQueryHandler(
