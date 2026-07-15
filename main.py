@@ -28,9 +28,9 @@ async def cek_stok(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await query.answer()
 
     text = """
-📦 WARUNG MINT MOBILE!
+📶 WARUNG MINT MOBILE!
 
-📊 STOK ITEM
+📦 STOK ITEM
 ✅ 11 Item Ready
 
 💰 Harga:
