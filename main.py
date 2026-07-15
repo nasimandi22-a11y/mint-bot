@@ -11,7 +11,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def cek_stok(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
-    await query.answer()
+    await query.answer(10)
     await query.edit_message_text("Stok ready bro!")
 
 app = Application.builder().token(TOKEN).build()
