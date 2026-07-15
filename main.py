@@ -9,7 +9,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     reply_markup = InlineKeyboardMarkup(keyboard)
     
     await update.message.reply_text(
-        "🔥 Selamat Datang di Mint Mobile Store!\n\n"
+        "🔥 Selamat Datang di MINT MOBILE DISTRIBUTOR!\n\n"
         "Nikmati layanan digital premium dengan proses super cepat, aman, dan terpercaya ✨\n\n"
         "Tekan tombol di bawah untuk mulai order",
         reply_markup=reply_markup
@@ -19,13 +19,7 @@ async def cek_stok(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
     await query.answer()
     
-    text = """📦 Produk: Link Aktivasi Mint Mobile 90 Days
-💰 Harga: Rp 150.000
-📊 Stok: 11 item
-✅ Ready — siap order!
-
-Ketuk tombol di bawah untuk beli"""
-    
+    text = "📦 Produk: Link Aktivasi Mint Mobile 90 Days\n💰 Harga: Rp 150.000\n📊 Stok: 11 item\n✅ Ready!\n\nKetuk 'Beli Sekarang' untuk lanjut"
     keyboard = [[InlineKeyboardButton("🛒 Beli Sekarang", callback_data='beli')]]
     await query.edit_message_text(text, reply_markup=InlineKeyboardMarkup(keyboard))
 
