@@ -12,10 +12,9 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def cek_stok(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
     await query.answer()
-    await query.edit_message_text("Stok ready!")
+    await query.edit_message_text("Stok ready bro!")
 
-if name == '__main__':
-    app = Application.builder().token(TOKEN).build()
-    app.add_handler(CommandHandler("start", start))
-    app.add_handler(CallbackQueryHandler(cek_stok, pattern='cek_stok'))
-    app.run_polling()
+app = Application.builder().token(TOKEN).build()
+app.add_handler(CommandHandler("start", start))
+app.add_handler(CallbackQueryHandler(cek_stok, pattern='cek_stok'))
+app.run_polling()
