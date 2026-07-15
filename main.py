@@ -23,7 +23,7 @@ async def cek_stok(update: Update, context: ContextTypes.DEFAULT_TYPE):
     keyboard = [[InlineKeyboardButton("🛒 Beli Sekarang", callback_data='beli')]]
     await query.edit_message_text(text, reply_markup=InlineKeyboardMarkup(keyboard))
 
-if name == '__main__':
+if __name__ == '__main__':
     app = Application.builder().token(TOKEN).build()
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CallbackQueryHandler(cek_stok, pattern='cek_stok'))
