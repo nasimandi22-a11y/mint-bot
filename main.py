@@ -18,7 +18,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     reply_markup = InlineKeyboardMarkup(keyboard)
 
     await update.message.reply_text(
-        "📶 WARUNG MINT MOBILE!",
+        "📶 Mint Mobile Store Distributor!",
         reply_markup=reply_markup
     )
 
@@ -28,7 +28,7 @@ async def cek_stok(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await query.answer()
 
     text = """
-📶 WARUNG Mint Mobile
+📶 Mint Mobile Store
 
 📦 STOK ITEM
 ✅ 11 Item Ready
@@ -82,7 +82,7 @@ Rp 100.000
 📦 Stok:
 ✅ 11 Item Ready
 
-✅ Ready — Siap Order!
+Silakan lanjut pembayaran.
 """
 
     else:
@@ -95,10 +95,16 @@ Rp 150.000
 📦 Stok:
 ✅ 11 Item Ready
 
-✅ Ready — Siap Order!
+Silakan lanjut pembayaran.
 """
 
     keyboard = [
+        [
+            InlineKeyboardButton(
+                "💳 Pilih Payment",
+                callback_data="payment"
+            )
+        ],
         [
             InlineKeyboardButton(
                 "⬅️ Kembali",
@@ -112,6 +118,76 @@ Rp 150.000
     await query.edit_message_text(
         text,
         reply_markup=reply_markup
+    )
+
+
+async def payment_menu(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    query = update.callback_query
+    await query.answer()
+
+    text = """
+💳 Pilih Metode Pembayaran
+
+Silakan pilih metode pembayaran:
+"""
+
+    keyboard = [
+        [
+            InlineKeyboardButton(
+                "📱 QR Payment",
+                callback_data="qr_payment"
+            ),
+            InlineKeyboardButton(
+                "💰 Wallet Address",
+                callback_data="wallet"
+            )
+        ],
+        [
+            InlineKeyboardButton(
+                "⬅️ Kembali",
+                callback_data="cek_stok"
+            )
+        ]
+    ]
+
+    reply_markup = InlineKeyboardMarkup(keyboard)
+
+    await query.edit_message_text(
+        text,
+        reply_markup=reply_markup
+    )
+
+
+async def qr_payment(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    query = update.callback_query
+    await query.answer()
+
+    await query.edit_message_text(
+        """
+📱 QR Payment
+
+Silakan scan QR pembayaran.
+
+Setelah melakukan pembayaran,
+kirim bukti pembayaran ke admin.
+"""
+    )
+
+
+async def wallet(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    query = update.callback_query
+    await query.answer()
+
+    await query.edit_message_text(
+        """
+💰 Wallet Address
+
+Address:
+PASTE_WALLET_ADDRESS_DISINI
+
+Setelah melakukan pembayaran,
+kirim bukti pembayaran ke admin.
+"""
     )
 
 
@@ -158,14 +234,12 @@ app.add_handler(
     CommandHandler("start", start)
 )
 
-
 app.add_handler(
     CallbackQueryHandler(
         cek_stok,
         pattern="cek_stok"
     )
 )
-
 
 app.add_handler(
     CallbackQueryHandler(
@@ -174,6 +248,26 @@ app.add_handler(
     )
 )
 
+app.add_handler(
+    CallbackQueryHandler(
+        payment_menu,
+        pattern="payment"
+    )
+)
+
+app.add_handler(
+    CallbackQueryHandler(
+        qr_payment,
+        pattern="qr_payment"
+    )
+)
+
+app.add_handler(
+    CallbackQueryHandler(
+        wallet,
+        pattern="wallet"
+    )
+)
 
 app.add_handler(
     CallbackQueryHandler(
